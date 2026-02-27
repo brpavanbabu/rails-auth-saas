@@ -1,38 +1,39 @@
-<h1>Log in</h1>
-
-<div class="card">
-  <%= form_with url: "/auth/google_oauth2", method: :post do %>
-    <%= button_tag "Sign in with Google", type: :submit, class: "btn btn-oauth" %>
-  <% end %>
-
-  <%= form_with url: "/auth/github", method: :post do %>
-    <%= button_tag "Sign in with GitHub", type: :submit, class: "btn btn-oauth" %>
-  <% end %>
-
-  <div class="divider">or sign in with email</div>
-
-  <%= form_with url: login_path do |form| %>
-    <div class="form-group">
-      <%= form.label :email %>
-      <%= form.email_field :email, required: true, autofocus: true, placeholder: "you@company.com" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :password %>
-      <%= form.password_field :password, required: true %>
-    </div>
-
-    <div class="checkbox-group">
-      <%= form.check_box :remember_me, {}, "1", "0" %>
-      <%= form.label :remember_me, "Remember me" %>
-    </div>
-
-    <div>
-      <%= form.submit "Log in", class: "btn btn-primary", style: "width:100%" %>
-    </div>
-  <% end %>
-
-  <p class="text-center text-muted mt-1">
-    Don't have an account? <a href="<%= signup_path %>">Sign up</a>
+<div style="max-width: 420px; margin: 2rem auto;">
+  <h1 style="text-align: center; margin-bottom: 0.5rem;">Welcome back!</h1>
+  <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+    Don't have an account? <a href="<%= signup_path %>" style="color: #0066cc; font-weight: 600;">Sign up for free</a>
   </p>
+
+  <div class="card">
+    <%= form_with url: "/auth/google_oauth2", method: :post do %>
+      <%= button_tag "Sign in with Google", type: :submit, class: "btn btn-oauth" %>
+    <% end %>
+
+    <%= form_with url: "/auth/github", method: :post do %>
+      <%= button_tag "Sign in with GitHub", type: :submit, class: "btn btn-oauth" %>
+    <% end %>
+
+    <div class="divider">or sign in with email</div>
+
+    <%= form_with url: login_path do |form| %>
+      <div class="form-group">
+        <%= form.label :email %>
+        <%= form.email_field :email, required: true, autofocus: true, placeholder: "you@company.com" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :password %>
+        <%= form.password_field :password, required: true %>
+      </div>
+
+      <div class="checkbox-group">
+        <%= form.check_box :remember_me, {}, "1", "0" %>
+        <%= form.label :remember_me, "Remember me" %>
+      </div>
+
+      <div>
+        <%= form.submit "Log in", class: "btn btn-primary", style: "width:100%" %>
+      </div>
+    <% end %>
+  </div>
 </div>

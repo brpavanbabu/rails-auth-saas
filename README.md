@@ -1,28 +1,117 @@
 # RailsAuthSaaS
 
-> Production-ready Rails authentication in 5 minutes. Built for healthcare, fintech, and SaaS startups.
+> **Production-ready Rails authentication template** with compliance modules for healthcare, fintech, and education.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rails Version](https://img.shields.io/badge/Rails-8.1%2B-red.svg)](https://rubyonrails.org/)
-[![Ruby Version](https://img.shields.io/badge/Ruby-4.0%2B-red.svg)](https://www.ruby-lang.org/)
+[![Ruby Version](https://img.shields.io/badge/Ruby-3.3%2B-red.svg)](https://www.ruby-lang.org/)
 
-## 🚀 What is RailsAuthSaaS?
+**Skip 2-4 weeks of authentication development.** Drop-in Rails template with OAuth, 2FA, SAML, multi-tenancy, and compliance modules for HIPAA, Fintech, and EdTech.
 
-RailsAuthSaaS is a **complete authentication system** for Rails applications that includes:
+---
 
-- ✅ Email/Password authentication
-- ✅ OAuth 2.0 (Google, GitHub, Microsoft)
-- ✅ Two-Factor Authentication (2FA/MFA)
-- ✅ Magic Links (passwordless login)
-- ✅ Enterprise SSO (SAML 2.0)
-- ✅ Multi-tenancy (account-based isolation)
-- ✅ **HIPAA Compliance Module** (healthcare apps)
-- ✅ **Fintech Compliance Module** (financial apps)
-- ✅ **EdTech LTI 1.3 Module** (learning management systems)
+## 🎯 Who This is For
 
-**Built for:** Healthcare startups, fintech apps, SaaS platforms, enterprise applications.
+### ✅ Perfect for:
+- Healthcare SaaS builders (telehealth, patient portals, EHR systems)
+- Fintech developers (payment platforms, banking apps, crypto)
+- EdTech platforms (LMS integrations with Canvas, Moodle, Blackboard)
+- B2B SaaS products (team collaboration, project management)
+- Enterprise apps (SSO, multi-tenancy, audit logs)
 
-**Saves:** 2-4 weeks of development time, $5K-20K in costs.
+### ❌ Not for:
+- Simple blogs or personal projects (use Devise—it's free)
+- Apps that don't need compliance features
+- Non-Rails frameworks
+
+---
+
+## 🚀 What's Included
+
+### Core Authentication
+- ✅ Email/Password (bcrypt hashing)
+- ✅ Remember Me (secure tokens)
+- ✅ Password reset flows
+- ✅ Magic links (passwordless)
+- ✅ Rate limiting
+- ✅ Session management
+
+### Advanced Features
+- ✅ **Two-Factor Authentication (2FA/MFA)**: TOTP with QR codes, backup codes
+- ✅ **OAuth 2.0**: Google, GitHub (Microsoft ready)
+- ✅ **Enterprise SSO**: SAML 2.0 (Okta, Azure AD, OneLogin)
+- ✅ **Multi-Tenancy**: Account-based isolation, roles, team management
+
+### Compliance Modules (Technical Infrastructure)
+
+#### 🏥 HIPAA Module
+- Audit logs (every user action)
+- PHI access tracking
+- Session timeout enforcement
+- Suspicious activity detection
+- **Use case**: Telehealth, patient portals, health tech SaaS
+
+#### 💰 Fintech Module  
+- Transaction logs (immutable)
+- Security event monitoring
+- Access control logs
+- Basic fraud detection patterns
+- **Use case**: Payment processors, banking apps, investment platforms
+
+#### 🎓 EdTech LTI 1.3 Module
+- Canvas/Moodle/Blackboard integration
+- OIDC login flow
+- Grade passback (AGS)
+- Deep linking support
+- **Use case**: Online courses, educational SaaS, learning analytics
+
+⚠️ **Important**: Compliance modules provide technical infrastructure only. They do NOT guarantee regulatory compliance. Consult qualified legal and compliance professionals.
+
+### Professional UI
+- Modern CSS design system (200+ lines)
+- Responsive layout (mobile-friendly)
+- Styled forms, buttons, cards
+- Professional navigation bar
+- OAuth button styling
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# Clone and install
+git clone https://github.com/yourusername/rails-auth-saas.git
+cd rails-auth-saas
+bundle install
+
+# Setup database
+rails db:create db:migrate
+
+# Generate encryption keys
+rails db:encryption:init
+# Copy output to .env file
+
+# Start server
+rails server
+```
+
+Visit `http://localhost:3000` - fully functional authentication system running.
+
+**See [DEPLOYMENT.md](DEPLOYMENT.md)** for production deployment (Railway, Render, Docker).
+
+---
+
+## 📋 What You Need to Add
+
+This template provides **authentication infrastructure**. You still build your core product:
+
+- Your business logic (what your app actually does)
+- Subscription billing (if SaaS)
+- Admin dashboard (if needed)
+- Landing page (marketing site)
+- Your domain-specific features
+
+**Think of this as**: A solid foundation so you can focus on building your unique product instead of reinventing authentication.
 
 ---
 
@@ -57,45 +146,44 @@ RailsAuthSaaS is a **complete authentication system** for Rails applications tha
 - Team/organization management
 - Perfect for B2B SaaS
 
-### Compliance Modules (Premium)
+### Compliance Modules
+
+⚠️ **DISCLAIMER**: These modules provide technical infrastructure only. They do NOT guarantee compliance with HIPAA, PCI DSS, SOC2, or any other regulations. You MUST consult qualified legal and compliance professionals.
 
 #### 🏥 HIPAA Compliance Module
-For healthcare applications that handle PHI (Protected Health Information):
-- Comprehensive audit logging (every user action)
+Technical features for healthcare applications (audit logging, session management):
+- Comprehensive audit logging
 - PHI access tracking
-- Automatic session timeout enforcement
-- Password complexity requirements
-- Training completion tracking
+- Session timeout enforcement
+- Password complexity helpers
 - Suspicious activity detection
-- BAA (Business Associate Agreement) template
-- Retention policy enforcement
 
-**Required for:** Telehealth, EHR systems, health tech SaaS
+**Use case:** Healthcare apps that need audit trail infrastructure as a starting point.
+
+**NOT included:** Legal compliance certification, BAA signing, security audits, breach notification procedures.
 
 #### 💰 Fintech Compliance Module
-For financial applications:
+Technical features for financial applications (transaction logging, monitoring):
 - Immutable transaction logging
 - Security event monitoring
-- KYC/AML tracking hooks
-- Risk scoring
-- Fraud detection patterns
-- Critical alert system
-- PCI DSS helpers
-- SOC2 audit reports
+- Access control logs
+- Basic fraud detection patterns
 
-**Required for:** Payment processors, banking apps, investment platforms
+**Use case:** Financial apps that need logging infrastructure as a starting point.
+
+**NOT included:** PCI DSS certification, SOC2 reports, actual fraud detection, regulatory filing.
 
 #### 🎓 EdTech LTI 1.3 Module
-For educational applications:
-- LMS integration (Canvas, Moodle, Blackboard)
+LMS integration for educational applications:
+- Canvas/Moodle/Blackboard integration
 - OIDC login flow
 - Deep linking support
-- Grade passback
-- Assignment & grade sync
+- Grade passback (basic implementation)
 - Launch validation
-- Rostering support
 
-**Required for:** Online courses, educational SaaS, learning platforms
+**Use case:** Educational apps integrating with Learning Management Systems.
+
+**NOT included:** FERPA legal compliance, production-grade grade sync, LMS vendor support.
 
 ---
 
@@ -334,7 +422,7 @@ GET  /lti/jwks            # Public keys
 
 ## 🧪 Testing
 
-All features include comprehensive tests:
+Tests are included but coverage is not comprehensive:
 
 ```bash
 # Run all tests
@@ -343,10 +431,9 @@ rails test
 # Run specific test suites
 rails test test/models/user_test.rb
 rails test test/controllers/sessions_controller_test.rb
-rails test test/integration/two_factor_flow_test.rb
 ```
 
-Test coverage: **95%+**
+**Note:** This is a starter project. You should add comprehensive tests for your specific use case.
 
 ---
 
@@ -355,203 +442,51 @@ Test coverage: **95%+**
 ### Built-in Security Features
 - ✅ Password hashing with bcrypt
 - ✅ CSRF protection
-- ✅ SQL injection prevention
-- ✅ XSS protection
-- ✅ Rate limiting (login attempts)
+- ✅ SQL injection prevention (via Rails)
+- ✅ XSS protection (via Rails)
+- ✅ Rate limiting (basic implementation)
 - ✅ Session timeout
-- ✅ Secure password reset tokens
 - ✅ 2FA with TOTP
 - ✅ OAuth state parameter validation
 - ✅ SAML signature verification
 
-### Security Audits
-- Regularly updated dependencies
-- No known vulnerabilities
-- Follows OWASP guidelines
-- Compliant with Rails security best practices
+### Security Warnings
+⚠️ **Before deploying to production:**
+- Conduct a professional security audit
+- Enable HTTPS/TLS everywhere
+- Configure secure session cookies
+- Set up monitoring and alerting
+- Implement proper rate limiting (consider Rack::Attack)
+- Review all dependencies for vulnerabilities
+- Configure proper CORS policies
 
----
-
-## 💰 Pricing
-
-### Free Tier (Open Source)
-- ✅ Core authentication
-- ✅ OAuth (Google, GitHub)
-- ✅ Rate limiting
-- ✅ Remember me
-- ✅ Magic links
-- ✅ Community support
-- ✅ MIT License (use in any project)
-
-### Pro Tier ($49/month)
-- ✅ Everything in Free
-- ✅ Two-Factor Authentication (2FA/MFA)
-- ✅ Multi-tenancy
-- ✅ All OAuth providers
-- ✅ Priority support
-- ✅ Commercial license
-- ✅ Priority bug fixes
-
-### Enterprise Tier ($299/month)
-- ✅ Everything in Pro
-- ✅ **HIPAA Compliance Module**
-- ✅ **Fintech Compliance Module**
-- ✅ **EdTech LTI 1.3 Module**
-- ✅ Enterprise SSO (SAML 2.0)
-- ✅ Custom integrations
-- ✅ Dedicated support
-- ✅ White-label option
-- ✅ BAA agreement (for HIPAA)
-
-[Get Started →](https://github.com/brpavanbabu/rails-auth-saas)
-
----
-
-## 🏢 Use Cases
-
-### Healthcare Startups
-**Perfect for:** Telehealth platforms, EHR systems, patient portals, health tech SaaS
-
-**What you get:**
-- HIPAA-compliant audit logging out-of-box
-- PHI (Protected Health Information) access tracking
-- BAA (Business Associate Agreement) templates
-- Session management and timeout enforcement
-- Password complexity requirements
-
-**Result:** Launch compliant healthcare apps in days, not months. Save $10K-20K in compliance costs.
-
-### Fintech Apps
-**Perfect for:** Payment processors, crypto platforms, banking apps, financial SaaS
-
-**What you get:**
-- Immutable transaction logging for audit trails
-- KYC/AML integration hooks
-- Security event monitoring
-- Risk scoring and fraud detection patterns
-- PCI DSS and SOC2 compliance helpers
-
-**Result:** Pass compliance audits from day one. Build fintech apps with confidence.
-
-### EdTech Platforms
-**Perfect for:** Learning management systems, online course platforms, educational tools
-
-**What you get:**
-- LTI 1.3 integration (Canvas, Moodle, Blackboard)
-- OIDC login flow
-- Grade passback (Assignment and Grade Services)
-- Deep linking support
-- FERPA-compliant audit logging
-
-**Result:** Integrate with LMS platforms in hours instead of weeks.
-
----
-
-## 🛠️ Technology Stack
-
-- **Rails**: 8.1.2
-- **Ruby**: 4.0.1
-- **Authentication**: `has_secure_password` (bcrypt)
-- **2FA**: `rotp` (TOTP), `rqrcode` (QR codes)
-- **OAuth**: `omniauth`, `omniauth-google-oauth2`, `omniauth-github`
-- **SAML**: `ruby-saml`
-- **Database**: PostgreSQL (recommended), MySQL, SQLite
-- **Testing**: Minitest (included)
-
----
-
-## 📖 Documentation
-
-All documentation is in the code:
-- **OAuth Setup**: See `config/initializers/omniauth.rb` and OAuth controller comments
-- **2FA Implementation**: See `app/controllers/two_factor_controller.rb` and User model
-- **Multi-Tenancy**: See `app/models/account.rb` and `app/models/membership.rb`
-- **HIPAA Compliance**: See `app/controllers/concerns/hipaa_compliance.rb`
-- **Fintech Compliance**: See `app/controllers/concerns/fintech_compliance.rb`
-- **LTI 1.3**: See `app/controllers/lti13_controller.rb`
+**This code has NOT been professionally audited.** Use at your own risk.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+This is a community project. Contributions welcome via pull requests.
 
-### Development Setup
-```bash
-git clone https://github.com/brpavanbabu/rails-auth-saas.git
-cd rails-auth-saas
-bundle install
-rails db:setup
-rails test
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
 ## 📝 License
 
-### Free Tier
-MIT License - Use in any project, commercial or personal.
+MIT License - Free to use, modify, and distribute in unlimited projects.
 
-### Pro & Enterprise Tiers
-Commercial License - Includes additional features and support.
-
-See [LICENSE.md](LICENSE.md) for details.
+See [LICENSE.md](LICENSE.md) for full details and important disclaimers.
 
 ---
 
-## 🆘 Support
+## 📞 Resources
 
-- **Documentation**: See README and code comments
-- **Community Support**: [GitHub Discussions](https://github.com/brpavanbabu/rails-auth-saas/discussions)
-- **Bug Reports**: [GitHub Issues](https://github.com/brpavanbabu/rails-auth-saas/issues)
-- **Feature Requests**: [GitHub Issues](https://github.com/brpavanbabu/rails-auth-saas/issues)
-
----
-
-## 🗺️ Roadmap
-
-### Q1 2026
-- [ ] Microsoft OAuth
-- [ ] Apple Sign In
-- [ ] WebAuthn (passkeys)
-- [ ] Magic link improvements
-
-### Q2 2026
-- [ ] GDPR compliance module
-- [ ] PCI DSS Level 1 certification
-- [ ] Audit log export (CSV, JSON)
-- [ ] More LMS integrations
-
-### Q3 2026
-- [ ] Mobile SDK (iOS/Android)
-- [ ] GraphQL API
-- [ ] Passwordless enterprise login
-- [ ] Advanced fraud detection
-
----
-
-## ⭐ Star History
-
-If this project helped you, please consider giving it a ⭐ on GitHub!
-
----
-
-## 🏆 Built With
-
-This project was built using **FREE AI agents** (99.99% cost savings).
-
-**Traditional cost to build:** $48,000-99,000  
-**Actual cost:** $0.00  
-**Time saved:** 3-6 months
-
----
-
-## 📞 Contact
-
+- **Full Feature List**: [WHAT-YOU-GET.md](WHAT-YOU-GET.md)
+- **Deployment Guide**: [DEPLOYMENT.md](DEPLOYMENT.md)
 - **GitHub**: [github.com/brpavanbabu/rails-auth-saas](https://github.com/brpavanbabu/rails-auth-saas)
-- **Issues**: [Report bugs or request features](https://github.com/brpavanbabu/rails-auth-saas/issues)
-- **Discussions**: [Ask questions or share ideas](https://github.com/brpavanbabu/rails-auth-saas/discussions)
+- **Issues**: [Report bugs](https://github.com/brpavanbabu/rails-auth-saas/issues)
 
 ---
 
-**Made with ❤️ for the Rails community**
+**Save 2-4 weeks of authentication development. Focus on building your unique product.**
