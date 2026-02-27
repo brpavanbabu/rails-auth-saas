@@ -458,7 +458,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Development Setup
 ```bash
-git clone https://github.com/yourusername/rails-auth-saas.git
+git clone https://github.com/brpavanbabu/rails-auth-saas.git
 cd rails-auth-saas
 bundle install
 rails db:setup
