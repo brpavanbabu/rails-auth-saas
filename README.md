@@ -103,8 +103,8 @@ For educational applications:
 
 ### Prerequisites
 ```bash
-ruby -v   # 4.0.0 or higher
-rails -v  # 8.1.0 or higher
+ruby -v   # 3.2.0 or higher
+rails -v  # 8.0.0 or higher
 ```
 
 ### Installation
@@ -117,12 +117,18 @@ cd rails-auth-saas
 # Install dependencies
 bundle install
 
+# Generate new Rails credentials (IMPORTANT - master.key not included for security)
+EDITOR="code --wait" rails credentials:edit
+# Or use nano: EDITOR=nano rails credentials:edit
+
 # Setup database
 rails db:create db:migrate
 
 # Start server
 rails server
 ```
+
+Visit `http://localhost:3000` - you'll see the login page with professional styling.
 
 **To integrate into your existing Rails app:**
 1. Copy the relevant controllers, models, and views to your app
@@ -133,39 +139,57 @@ rails server
 ### 🎉 Done!
 
 Visit `http://localhost:3000` and you'll have:
-- `/signup` - User registration
-- `/login` - User login
+- `/signup` - User registration with styled forms
+- `/login` - User login with OAuth buttons
 - `/dashboard` - Protected user dashboard
-- `/auth/google` - Google OAuth
-- `/auth/github` - GitHub OAuth
-- `/two_factor/setup` - 2FA setup
+- `/auth/google_oauth2` - Google OAuth (after configuring client ID/secret)
+- `/auth/github` - GitHub OAuth (after configuring client ID/secret)
+- `/two_factor/setup` - 2FA setup with QR code
+
+**Note:** OAuth providers require configuration (see Configuration section below).
 
 ---
 
 ## 🔧 Configuration
 
-### 1. OAuth Providers
+### 1. Environment Variables
 
-Add to `config/initializers/omniauth.rb`:
+Create a `.env` file in the root directory:
 
-```ruby
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
-  provider :github, ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET']
-end
-```
-
-Set environment variables:
 ```bash
-# .env
+# Required for Active Record Encryption
+ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=generate_with_rails_secret
+ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=generate_with_rails_secret  
+ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=generate_with_rails_secret
+
+# Email
+MAILER_FROM=noreply@yourdomain.com
+SMTP_ADDRESS=smtp.sendgrid.net
+SMTP_USERNAME=apikey
+SMTP_PASSWORD=your_sendgrid_api_key
+
+# OAuth (optional - leave blank to disable)
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_secret
-
 GITHUB_CLIENT_ID=your_github_client_id
 GITHUB_CLIENT_SECRET=your_github_secret
 ```
 
-### 2. Email Configuration
+**Generate encryption keys:**
+```bash
+rails db:encryption:init
+# Copy the output to your .env file
+```
+
+### 2. OAuth Providers (Optional)
+
+OAuth is already configured in `config/initializers/omniauth.rb`. Just set the environment variables above.
+
+**Get OAuth credentials:**
+- **Google**: [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+- **GitHub**: [GitHub OAuth Apps](https://github.com/settings/developers)
+
+### 3. Email Configuration
 
 ```ruby
 # config/environments/production.rb
@@ -180,7 +204,16 @@ config.action_mailer.smtp_settings = {
 }
 ```
 
-### 3. Enable Compliance Modules
+### 3. Email Configuration
+
+Email configuration is already set in `config/environments/production.rb`. Just set the SMTP environment variables shown in step 1.
+
+**Recommended Email Services:**
+- SendGrid (free tier: 100 emails/day)
+- Mailgun (free tier: 5K emails/month)
+- AWS SES (very cheap)
+
+### 4. Enable Compliance Modules
 
 #### HIPAA Compliance
 ```ruby
