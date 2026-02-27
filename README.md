@@ -481,10 +481,10 @@ See [LICENSE.md](LICENSE.md) for details.
 
 ## 🆘 Support
 
-- **Documentation**: [docs.railsauthsaas.com](https://docs.railsauthsaas.com)
-- **Community Support**: [GitHub Discussions](https://github.com/yourusername/rails-auth-saas/discussions)
-- **Pro Support**: support@railsauthsaas.com
-- **Enterprise Support**: Dedicated Slack channel
+- **Documentation**: See README and code comments
+- **Community Support**: [GitHub Discussions](https://github.com/brpavanbabu/rails-auth-saas/discussions)
+- **Bug Reports**: [GitHub Issues](https://github.com/brpavanbabu/rails-auth-saas/issues)
+- **Feature Requests**: [GitHub Issues](https://github.com/brpavanbabu/rails-auth-saas/issues)
 
 ---
 
@@ -530,10 +530,9 @@ Learn how we did it: [Building with AI Agents](docs/ai-agents.md)
 
 ## 📞 Contact
 
-- **Website**: [railsauthsaas.com](https://railsauthsaas.com)
-- **Email**: hello@railsauthsaas.com
-- **Twitter**: [@railsauthsaas](https://twitter.com/railsauthsaas)
-- **GitHub**: [github.com/yourusername/rails-auth-saas](https://github.com/yourusername/rails-auth-saas)
+- **GitHub**: [github.com/brpavanbabu/rails-auth-saas](https://github.com/brpavanbabu/rails-auth-saas)
+- **Issues**: [Report bugs or request features](https://github.com/brpavanbabu/rails-auth-saas/issues)
+- **Discussions**: [Ask questions or share ideas](https://github.com/brpavanbabu/rails-auth-saas/discussions)
 
 ---
 
