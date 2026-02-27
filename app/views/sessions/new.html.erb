@@ -1,0 +1,32 @@
+<h1>Log in</h1>
+
+<%= form_with url: "/auth/google_oauth2", method: :post do %>
+  <%= button_tag "Sign in with Google", type: :submit, class: "btn" %>
+<% end %>
+
+<%= form_with url: "/auth/github", method: :post do %>
+  <%= button_tag "Sign in with GitHub", type: :submit, class: "btn" %>
+<% end %>
+
+<p>— or —</p>
+
+<%= form_with url: login_path do |form| %>
+  <div>
+    <%= form.label :email, "Email" %>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :password, "Password" %>
+    <%= form.password_field :password, required: true %>
+  </div>
+
+  <div>
+    <%= form.check_box :remember_me, {}, "1", "0" %>
+    <%= form.label :remember_me, "Remember me" %>
+  </div>
+
+  <div>
+    <%= form.submit "Log in" %>
+  </div>
+<% end %>

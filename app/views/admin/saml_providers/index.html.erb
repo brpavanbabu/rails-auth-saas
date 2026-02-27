@@ -1,0 +1,36 @@
+<h1>SSO Configuration - <%= @account.name %></h1>
+
+<p>
+  Configure SAML 2.0 identity providers for your account. Share the metadata URL with your IdP administrator.
+</p>
+
+<%= link_to "Add SAML Provider", new_admin_account_saml_provider_path(@account) %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Entity ID</th>
+      <th>Status</th>
+      <th>Metadata URL</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @saml_providers.each do |provider| %>
+      <tr>
+        <td><%= provider.name %></td>
+        <td><%= provider.entity_id %></td>
+        <td><%= provider.active? ? "Active" : "Inactive" %></td>
+        <td>
+          <code><%= saml_metadata_url(account_id: provider.account_id) %></code>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_admin_account_saml_provider_path(@account, provider) %>
+          <%= button_to "Remove", admin_account_saml_provider_path(@account, provider),
+            method: :delete, data: { turbo_confirm: "Remove this SAML provider?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

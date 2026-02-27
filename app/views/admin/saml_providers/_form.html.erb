@@ -1,0 +1,57 @@
+<%= form_with model: [:admin, @account, saml_provider], local: true do |form| %>
+  <% if saml_provider.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(saml_provider.errors.count, "error") %> prohibited this SAML provider from being saved:</h2>
+      <ul>
+        <% saml_provider.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true, placeholder: "e.g. Okta, Azure AD" %>
+  </div>
+
+  <div>
+    <%= form.label :entity_id %>
+    <%= form.text_field :entity_id, required: true, placeholder: "https://your-idp.com/entity-id" %>
+  </div>
+
+  <div>
+    <%= form.label :sso_target_url %>
+    <%= form.url_field :sso_target_url, required: true, placeholder: "https://your-idp.com/sso" %>
+  </div>
+
+  <div>
+    <%= form.label :idp_metadata_url, "IdP Metadata URL (optional)" %>
+    <%= form.url_field :idp_metadata_url, placeholder: "https://your-idp.com/metadata" %>
+  </div>
+
+  <div>
+    <%= form.label :idp_cert, "IdP Certificate (X.509)" %>
+    <%= form.text_area :idp_cert, rows: 8, placeholder: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----" %>
+  </div>
+
+  <div>
+    <%= form.label :name_identifier_format %><br>
+    <%= form.select :name_identifier_format,
+      options_for_select([
+        ["Email (default)", "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress"],
+        ["Unspecified", "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"],
+        ["Persistent", "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent"]
+      ], saml_provider.name_identifier_format),
+      { include_blank: "Use default" } %>
+  </div>
+
+  <div>
+    <%= form.check_box :active, checked: saml_provider.active.nil? ? true : saml_provider.active %>
+    <%= form.label :active, "Active" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

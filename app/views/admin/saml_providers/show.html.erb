@@ -1,0 +1,18 @@
+<h1><%= @saml_provider.name %></h1>
+
+<dl>
+  <dt>Entity ID</dt>
+  <dd><%= @saml_provider.entity_id %></dd>
+
+  <dt>SSO Target URL</dt>
+  <dd><%= @saml_provider.sso_target_url %></dd>
+
+  <dt>Status</dt>
+  <dd><%= @saml_provider.active? ? "Active" : "Inactive" %></dd>
+
+  <dt>Metadata URL (share with IdP admin)</dt>
+  <dd><code><%= saml_metadata_url(account_id: @account.id) %></code></dd>
+</dl>
+
+<%= link_to "Edit", edit_admin_account_saml_provider_path(@account, @saml_provider) %>
+<%= link_to "Back", admin_account_saml_providers_path(@account) %>
