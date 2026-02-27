@@ -1,20 +1,18 @@
 # frozen_string_literal: true
 
-# Security Event Model - SOC2 Compliance
 class SecurityEvent < ApplicationRecord
   belongs_to :user, optional: true
-  belongs_to :resolved_by, class_name: 'User', optional: true
+  belongs_to :resolved_by, class_name: "User", optional: true
 
   validates :event_type, :severity, presence: true
 
-  encrypts :details if Rails.application.credentials.secret_key_base.present?
+  encrypts :details
 
   scope :unresolved, -> { where(resolved: false) }
-  scope :critical, -> { where(severity: 'critical') }
+  scope :critical, -> { where(severity: "critical") }
   scope :recent, -> { order(created_at: :desc) }
 
-  # Log security event
-  def self.log_event(type:, severity: 'low', user: nil, details: nil, request: nil)
+  def self.log_event(type:, severity: "low", user: nil, details: nil, request: nil)
     create!(
       user: user,
       event_type: type,
@@ -24,20 +22,16 @@ class SecurityEvent < ApplicationRecord
     )
   end
 
-  # Alert on critical events
   after_create :alert_if_critical
 
   private
 
   def alert_if_critical
-    if severity == 'critical' && !resolved
-      # Send alert (email, Slack, PagerDuty, etc.)
-      SecurityMailer.critical_event(self).deliver_later
-    end
+    return unless severity == "critical" && !resolved
+    Rails.logger.warn "[SECURITY ALERT] Critical event: #{event_type} | User: #{user_id} | IP: #{ip_address}"
   end
 end
 
-# Access Control Log Model
 class AccessControlLog < ApplicationRecord
   belongs_to :user
 
@@ -46,8 +40,8 @@ class AccessControlLog < ApplicationRecord
   def self.log_access_attempt(user:, resource:, permission:, granted:, reason: nil)
     create!(
       user: user,
-      resource_type: resource&.class&.name,
-      resource_id: resource&.id,
+      resource_type: resource.is_a?(String) ? resource : resource&.class&.name,
+      resource_id: resource.is_a?(String) ? nil : resource&.id,
       permission: permission,
       granted: granted,
       reason: reason

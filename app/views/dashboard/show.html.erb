@@ -1,2 +1,37 @@
-<h1>Dashboard</h1>
-<p>Welcome to your dashboard.</p>
+<div class="dashboard-header">
+  <h1>Dashboard</h1>
+  <p class="text-muted">Welcome, <%= current_user.email %></p>
+</div>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <h3>Two-Factor Authentication</h3>
+    <% if current_user.otp_required_for_login? %>
+      <p>2FA is <strong>enabled</strong>.</p>
+      <a href="<%= two_factor_setup_path %>" class="btn btn-outline mt-1">Manage 2FA</a>
+    <% else %>
+      <p>Add an extra layer of security to your account.</p>
+      <a href="<%= two_factor_setup_path %>" class="btn btn-primary mt-1">Enable 2FA</a>
+    <% end %>
+  </div>
+
+  <div class="feature-card">
+    <h3>Connected Accounts</h3>
+    <% if current_user.oauth_accounts.any? %>
+      <% current_user.oauth_accounts.each do |oa| %>
+        <p><%= oa.provider.titleize %> (<%= oa.email %>)
+          <%= button_to "Unlink", unlink_oauth_path(provider: oa.provider), method: :delete, class: "btn btn-outline", style: "display:inline;padding:0.25rem 0.5rem;font-size:0.8rem" %>
+        </p>
+      <% end %>
+    <% else %>
+      <p>No connected OAuth accounts.</p>
+    <% end %>
+  </div>
+
+  <div class="feature-card">
+    <h3>Account</h3>
+    <p><strong>Email:</strong> <%= current_user.email %></p>
+    <p><strong>Verified:</strong> <%= current_user.email_verified? ? "Yes" : "No" %></p>
+    <p><strong>Joined:</strong> <%= current_user.created_at.strftime("%B %d, %Y") %></p>
+  </div>
+</div>

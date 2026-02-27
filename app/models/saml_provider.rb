@@ -35,7 +35,7 @@ class SamlProvider < ApplicationRecord
   end
 
   def acs_url(request)
-    return "https://example.com/auth/saml/#{account_id}/callback" if request.blank?
+    return "urn:rubyonrails:saml:acs" if request.blank?
     "#{request.base_url}/auth/saml/#{account_id}/callback"
   end
 end

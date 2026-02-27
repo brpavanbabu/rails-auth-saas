@@ -1,21 +1,25 @@
 <h1>Two-Factor Authentication</h1>
 
-<% if current_user.otp_required_for_login? %>
-  <p>Two-factor authentication is enabled.</p>
-  <%= button_to "Disable 2FA", two_factor_disable_path, method: :post, data: { turbo_confirm: "Are you sure?" } %>
-<% else %>
-  <p>Scan this QR code with your authenticator app:</p>
-  <div class="qr-code">
-    <%= @qr_code.as_svg(module_size: 4).html_safe %>
-  </div>
+<div class="card">
+  <% if current_user.otp_required_for_login? %>
+    <p>Two-factor authentication is <strong>enabled</strong>.</p>
+    <p class="text-muted">Your account is protected with an authenticator app.</p>
+    <%= button_to "Disable 2FA", two_factor_disable_path, method: :post, class: "btn btn-outline mt-1", data: { turbo_confirm: "Are you sure you want to disable 2FA?" } %>
+  <% else %>
+    <p>Scan this QR code with your authenticator app (Google Authenticator, Authy, 1Password):</p>
 
-  <%= form_with url: two_factor_enable_path, method: :post do |form| %>
-    <div>
-      <%= form.label :otp_code, "Enter the 6-digit code from your app" %>
-      <%= form.text_field :otp_code, maxlength: 6, pattern: "[0-9]*", inputmode: "numeric", autocomplete: "one-time-code" %>
+    <div class="qr-code">
+      <%= @qr_code.as_svg(module_size: 4).html_safe %>
     </div>
-    <div>
-      <%= form.submit "Enable 2FA" %>
-    </div>
+
+    <%= form_with url: two_factor_enable_path, method: :post do |form| %>
+      <div class="form-group">
+        <%= form.label :otp_code, "Enter the 6-digit code from your app" %>
+        <%= form.text_field :otp_code, maxlength: 6, pattern: "[0-9]*", inputmode: "numeric", autocomplete: "one-time-code", autofocus: true %>
+      </div>
+      <div>
+        <%= form.submit "Enable 2FA", class: "btn btn-primary", style: "width:100%" %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

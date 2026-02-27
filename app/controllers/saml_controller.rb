@@ -50,9 +50,11 @@ class SamlController < ApplicationController
       user.update!(saml_uid: nameid) if user.saml_uid.blank?
       user
     else
+      password = SecureRandom.hex(32)
       User.create!(
         email: email,
-        password: SecureRandom.hex(32),
+        password: password,
+        password_confirmation: password,
         saml_uid: nameid
       )
     end

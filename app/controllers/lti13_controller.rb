@@ -136,12 +136,12 @@ class Lti13Controller < ApplicationController
   end
 
   def find_or_create_lti_user(claims)
-    lti_user_id = claims['sub']
-    email = claims['email'] || "lti_#{lti_user_id}@example.com"
-    name = claims['name'] || claims['given_name'] || 'LTI User'
+    lti_user_id = claims["sub"]
+    email = claims["email"] || "lti_#{lti_user_id}@lti-user.local"
+    name = claims["name"] || claims["given_name"] || "LTI User"
 
     user = User.find_by(lti_user_id: lti_user_id) || User.find_by(email: email)
-    
+
     unless user
       password = SecureRandom.hex(32)
       user = User.create!(

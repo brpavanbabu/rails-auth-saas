@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 # HIPAA Compliance Concern
-# Include in ApplicationController to enable HIPAA audit logging
+# Include in ApplicationController to enable HIPAA audit logging.
+#
+# Prerequisites: your Account model must respond to `hipaa_enabled?`
+# and your User model should have `session_timeout_minutes` (default: 15).
 module HipaaCompliance
   extend ActiveSupport::Concern
 
@@ -13,7 +16,12 @@ module HipaaCompliance
   private
 
   def hipaa_enabled?
-    current_user&.accounts&.any?(&:hipaa_enabled?)
+    return false unless current_user
+    current_account&.respond_to?(:hipaa_enabled?) && current_account.hipaa_enabled?
+  end
+
+  def current_account
+    @current_account ||= current_user&.accounts&.first
   end
 
   def log_request_for_hipaa
@@ -28,14 +36,19 @@ module HipaaCompliance
   def check_session_timeout
     return unless current_user
 
-    timeout_minutes = current_user.session_timeout_minutes || 15
-    last_activity = session[:last_activity_at]&.to_time
+    timeout_minutes = if current_user.respond_to?(:session_timeout_minutes)
+                        current_user.session_timeout_minutes || 15
+    else
+                        15
+    end
 
-    if last_activity && Time.current > last_activity + timeout_minutes.minutes
+    last_activity = session[:last_activity_at]
+
+    if last_activity && Time.current > Time.parse(last_activity.to_s) + timeout_minutes.minutes
       reset_session
       redirect_to login_path, alert: "Session expired for security (HIPAA compliance)"
     else
-      session[:last_activity_at] = Time.current
+      session[:last_activity_at] = Time.current.iso8601
     end
   end
 
@@ -47,17 +60,5 @@ module HipaaCompliance
       justification: justification,
       request: request
     )
-  end
-
-  def require_hipaa_training
-    unless current_user.hipaa_trained_at && current_user.hipaa_trained_at > 1.year.ago
-      redirect_to hipaa_training_path, alert: "HIPAA training required"
-    end
-  end
-
-  def require_password_change_check
-    if current_user.force_password_change
-      redirect_to change_password_path, alert: "Password change required for compliance"
-    end
   end
 end

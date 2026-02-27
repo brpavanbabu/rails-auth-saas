@@ -1,13 +1,15 @@
-<h1>Two-Factor Authentication</h1>
+<h1>Two-Factor Verification</h1>
 
-<p>Enter the 6-digit code from your authenticator app, or a backup code.</p>
+<div class="card">
+  <p>Enter the 6-digit code from your authenticator app, or use a backup code.</p>
 
-<%= form_with url: two_factor_verify_path, method: :post do |form| %>
-  <div>
-    <%= form.label :otp_code, "Verification code" %>
-    <%= form.text_field :otp_code, maxlength: 10, autocomplete: "one-time-code", required: true %>
-  </div>
-  <div>
-    <%= form.submit "Verify" %>
-  </div>
-<% end %>
+  <%= form_with url: two_factor_verify_path, method: :post do |form| %>
+    <div class="form-group">
+      <%= form.label :otp_code, "Verification code" %>
+      <%= form.text_field :otp_code, maxlength: 10, autocomplete: "one-time-code", required: true, autofocus: true %>
+    </div>
+    <div>
+      <%= form.submit "Verify", class: "btn btn-primary", style: "width:100%" %>
+    </div>
+  <% end %>
+</div>
