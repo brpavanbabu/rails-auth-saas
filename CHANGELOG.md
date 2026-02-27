@@ -98,4 +98,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 For full release notes and migration guides, visit:
-https://docs.railsauthsaas.com/changelog
+https://github.com/brpavanbabu/rails-auth-saas/releases

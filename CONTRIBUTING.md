@@ -106,7 +106,7 @@ Update docs when adding features:
 
 ```bash
 # Clone repo
-git clone https://github.com/yourusername/rails-auth-saas.git
+git clone https://github.com/brpavanbabu/rails-auth-saas.git
 cd rails-auth-saas
 
 # Install dependencies
@@ -139,9 +139,8 @@ rails-auth-saas/
 
 ## Questions?
 
-- Open a [Discussion](https://github.com/yourusername/rails-auth-saas/discussions)
-- Email: hello@railsauthsaas.com
-- Twitter: [@railsauthsaas](https://twitter.com/railsauthsaas)
+- Open a [Discussion](https://github.com/brpavanbabu/rails-auth-saas/discussions)
+- Submit an [Issue](https://github.com/brpavanbabu/rails-auth-saas/issues)
 
 ---
 

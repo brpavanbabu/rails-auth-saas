@@ -36,4 +36,4 @@ additional features are provided under a commercial license:
 - Priority support
 - White-label option
 
-Contact hello@railsauthsaas.com for commercial licensing.
+Contact via [GitHub Issues](https://github.com/brpavanbabu/rails-auth-saas/issues) for commercial licensing inquiries.

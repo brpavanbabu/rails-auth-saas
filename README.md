@@ -109,38 +109,26 @@ rails -v  # 8.1.0 or higher
 
 ### Installation
 
-#### Option 1: New Rails App
 ```bash
-# Create new Rails app
-rails new myapp --database=postgresql
-cd myapp
+# Clone the repository
+git clone https://github.com/brpavanbabu/rails-auth-saas.git
+cd rails-auth-saas
 
-# Apply RailsAuthSaaS template
-rails app:template LOCATION=https://railsauthsaas.com/install.rb
+# Install dependencies
+bundle install
 
-# Run migrations
+# Setup database
 rails db:create db:migrate
 
 # Start server
 rails server
 ```
 
-#### Option 2: Existing Rails App
-```bash
-# Add to your Gemfile
-gem 'rails_auth_saas'
-
-# Or for source installation
-git clone https://github.com/yourusername/rails-auth-saas.git
-cd rails-auth-saas
-bundle install
-
-# Copy files to your app
-rake rails_auth_saas:install
-
-# Run migrations
-rails db:migrate
-```
+**To integrate into your existing Rails app:**
+1. Copy the relevant controllers, models, and views to your app
+2. Run the migrations from `db/migrate/`
+3. Add required gems to your `Gemfile`
+4. Configure OAuth/SAML providers as needed
 
 ### 🎉 Done!
 
@@ -382,7 +370,7 @@ Test coverage: **95%+**
 - ✅ White-label option
 - ✅ BAA agreement (for HIPAA)
 
-[Get Pro →](https://railsauthsaas.com/pricing) | [Try Free →](https://github.com/yourusername/rails-auth-saas)
+[Get Started →](https://github.com/brpavanbabu/rails-auth-saas)
 
 ---
 
@@ -439,16 +427,15 @@ Test coverage: **95%+**
 
 ---
 
-## 📖 Guides
+## 📖 Documentation
 
-- [Installation Guide](docs/installation.md)
-- [OAuth Setup Guide](docs/oauth.md)
-- [2FA Implementation](docs/two-factor.md)
-- [Multi-Tenancy Guide](docs/multi-tenancy.md)
-- [HIPAA Compliance Guide](docs/hipaa.md)
-- [Fintech Compliance Guide](docs/fintech.md)
-- [LTI 1.3 Integration](docs/lti.md)
-- [Deployment Guide](docs/deployment.md)
+All documentation is in the code:
+- **OAuth Setup**: See `config/initializers/omniauth.rb` and OAuth controller comments
+- **2FA Implementation**: See `app/controllers/two_factor_controller.rb` and User model
+- **Multi-Tenancy**: See `app/models/account.rb` and `app/models/membership.rb`
+- **HIPAA Compliance**: See `app/controllers/concerns/hipaa_compliance.rb`
+- **Fintech Compliance**: See `app/controllers/concerns/fintech_compliance.rb`
+- **LTI 1.3**: See `app/controllers/lti13_controller.rb`
 
 ---
 
@@ -522,9 +509,7 @@ This project was built using **FREE AI agents** (99.99% cost savings).
 
 **Traditional cost to build:** $48,000-99,000  
 **Actual cost:** $0.00  
-**Time saved:** 3-6 months  
-
-Learn how we did it: [Building with AI Agents](docs/ai-agents.md)
+**Time saved:** 3-6 months
 
 ---
 
